@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="authour" content="Fon desmond ade">
+		<title>{% block title %}  {% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'todo/css/bootstrap.min.css' %}"> 
+	</head>
+	<body>
+		{% if user.is_authenticated %}
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background:#98AFC7">
+			<a class="navbar-brand" href="{% url 'todo:dashboard' %}">NoteKeeper</a>
+			{% else %}
+			<nav class="navbar navbar-expand-lg navbar-dark" style="background:#98AFC7">
+			<a class="navbar-brand" href="{% url 'todo:home' %}">NoteKeeper</a>
+			{% endif %}
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+
+					{# Users who are authenticated should not be sent to the websites landing homepage#}
+					{% if user.is_authenticated %}
+					<a class="nav-item nav-link active" href="{% url 'todo:dashboard' %}">Home </a>
+
+					{% else %}
+					<a class="nav-item nav-link active" href="{% url 'todo:home' %}">Home </a>
+					{% endif %}
+
+				    {# checking if user is logged in or not to display login url #}
+
+				    {% if user.is_authenticated %}
+					<a class="nav-item nav-link active" href="{% url 'password_change' %}">Change password</a>
+					<a class="nav-item nav-link active" href="{% url 'logout' %}">Logout</a>
+					{% else %}
+					<a class="nav-item nav-link active" href="{% url 'login' %}">Login</a>
+					<a class="nav-item nav-link active" href="{% url 'todo:signup' %}">Sign up</a>
+
+					{% endif %}
+
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			{% block content %}  {% endblock %}
+		</div>
+		<nav class="navbar fixed-bottom " style="background-color:#D5DBDB">
+			<p>@NoteKeeper<p>
+		</nav>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="{% static 'todo/js/bootstrap.js' %}"></script> 
+	</body>
+</html>

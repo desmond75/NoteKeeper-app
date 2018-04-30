@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="authour" content="Fon desmond ade">
+		<title>Notekeeper</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'todo/css/bootstrap.min.css' %}"> 
+
+		<style>
+			body{
+				background:url('static/todo/images/book.jpg');
+				}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background:#98AFC7">
+			<a class="navbar-brand" href="{% url 'todo:home' %}">NoteKeeper</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="{% url 'todo:home' %}">Home </a>
+					
+
+				    {# checking if user is logged in or not to display login url #}
+				    
+				    {% if user.is_authenticated %}
+					<a class="nav-item nav-link active" href="{% url 'logout' %}">Logout</a>
+					{% else %}
+					<a class="nav-item nav-link active" href="{% url 'login' %}">Login</a>
+					<a class="nav-item nav-link active" href="{% url 'todo:signup' %}">Sign up</a>
+
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+		<div class="container" style="padding-top: 160px;">
+		  <div class="row">
+		    <div class="col-sm-6">
+		    	<div class="jumbotron">
+			    	<h1 style="color:black">Free Web Note Book </h1>
+			    	<button class="btn" style="background:black"><h1><a href="{% url 'todo:signup' %}">Sign up</a></h1></button>
+		        </div>
+		    </div>
+		  </div>
+	    </div>
+
+		<nav class="navbar fixed-bottom " style="background-color:#D5DBDB">
+			<p>Develope by <a href="https://github.com/desmond75">Fon Desmond Ade </a> on April 27. Powered by Django framework</p>
+			<p>Copyright 2018 - {{year}} </p>
+			<a class="navbar-brand" href="#"></a>
+		</nav>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="{% static 'todo/js/bootstrap.js' %}"></script> 
+
+	</body>
+
+</html>

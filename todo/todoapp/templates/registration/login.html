@@ -1,0 +1,58 @@
+
+{% extends "registration/base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+{# {{name}} this will be autoescape #}
+
+<div class="container" style="padding-top: 30px;">
+	<div class="row">
+		<div class="col-md-">
+			{# this is for dismissible alerts#}
+
+			{% if form.errors %}
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			
+				<p>Your username and password didn't match. Please try again.</p>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			{% endif %}
+	    </div>
+    </div>
+
+
+	<div class="container" style="padding-top: 60px;">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="card" style="width:26rem;">
+					<div class="card-body">
+						<h3 class="card-title"><span class="badge badge-secondary">Login</span></h3><br />
+
+
+						<form  method="post">
+							 {% csrf_token %}
+							<div class="form-group">
+								<label>Username</label>
+								<input class="form-control" name="username" type="text" placeholder="Username">
+								<br />
+								<label >Password</label>
+								<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">	
+								<a href="{% url 'password_reset' %}" class="card-link">Forgot password</a>
+
+							</div>				    
+							<button  type="submit" class="btn" style="background:#98AFC7">Login</button> 
+						</form>
+					</div>	
+				    <p>Don't have an account <a href="{% url 'todo:signup' %}" class="card-link">Sign up</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

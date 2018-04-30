@@ -1,0 +1,59 @@
+{% extends "registration/base.html" %}
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+
+{# {{name}} this will be autoescape #}
+
+
+
+<div class="container" style="padding-top: 70px;">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="card" style="width: 26rem;">
+				<div class="card-body">
+					<h3 class="card-title"><span class="badge badge-secondary">Sign up</span></h3><br />
+
+					<form action="{% url 'todo:signup' %}" method="post">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>First Names</label>
+							<input class="form-control" name="firstname" type="text" placeholder="firstname">
+							<br />
+							<label>Last Names</label>
+							<input class="form-control" name="lastname" type="text" placeholder="lastnames">
+							<br />
+							<label>Username</label>
+							<input class="form-control" name="username" type="text" placeholder="usernames">
+							<br />
+							<label>Email</label>
+							<input class="form-control" name="email" type="text" placeholder="Email">
+							<br />
+							<label >Password</label>
+							<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"><br />
+
+                            {# signup error message alert  to ensure all fields are filled#}
+                            {% if error %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            	<p>{{error}}</p>
+                            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            		<span aria-hidden="true">&times;</span>
+                            	</button>
+                            </div>
+                             {% endif %}
+
+						</div>
+						<button  type="submit" class="btn" style="background:#98AFC7">Signup</button>
+						
+					</form><br />
+					<p>Have an account  <a href="{% url 'login' %}" class="card-link">Login</a></p>
+
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

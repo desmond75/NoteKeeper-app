@@ -1,0 +1,33 @@
+{% extends "registration/base.html" %}
+{% block title %} Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container" style="padding-top: 60px">
+	<div class="row">
+			<div class="card col-md-7" style="width: 40rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{note.title}}</h5><hr>
+					<p><b>Created on </b>: {{note.time}}</p><hr>
+					 <p>{{note.body}}</p><hr>
+					<button class="btn" style="background:#98AFC7"> <a href="{% url 'todo:edit' note.id %}" style="color:white">Edit</a></button>       
+					<button class="btn" style="background:#98AFC7"><a href="{% url 'todo:delete' note.id %}" style="color:white">Delete</a></button>
+				</div>
+		    </div>
+			<div class="card col-md-4" style="width: 30rem;">
+				<div class="card-body">
+					<h5 class="card-title">Notes {{user.note_set.all|length}}</h5><hr>
+					{% if user %}
+					{% for note in user.note_set.all %}
+					<ul>
+						<a href="{% url 'todo:view_note' note.id %}"><li><p class="card-text">{{note}}</p></li></a>
+						{{note.time}} 
+				    </ul>
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+	</div>
+</div>
+{% endblock %}
+

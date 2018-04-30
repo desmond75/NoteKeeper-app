@@ -1,0 +1,68 @@
+
+{% extends "registration/base.html" %}
+{% block title %} Dashboard{% endblock %}
+
+{% block content %}
+<br>
+{# Greeting text #}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-7">
+			<h2 style="font-family:Monospace;" class="alert alert-secondary">Hello {{user.get_username|title}},welcome to your free notebook!</h2>
+		</div>
+	</div>
+</div>
+<div class="container" style="padding-top: 70px;">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="card" style="width: 30rem;">
+				<div class="card-body">
+					<h5 class="card-title">Create New Note </h5>
+
+					{# note submission form #}
+					<form method="post" action="{% url 'todo:create_note' user.id %}">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Note title</label>
+							<input type="text" class="form-control" name="title" placeholder="Note title">
+							<br />
+							<label for="exampleFormControlTextarea1">Note body</label>
+							<textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3">Notes</textarea>
+							<br />
+						</div>
+						<button  type="submit" class="btn" style="background:#98AFC7">Save</button>
+					</form><br>
+					{# Display  error message if user submits form without data #}
+					{% if error %}
+					<p class="alert alert-danger alert-dismissible fade show" role="alert">{{error}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
+					{% endif %}
+				</div>
+			</div>
+			<br />
+		</div>
+		<div class="col-sm-4">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Notes <b style="color:green">{{user.note_set.all|length}}</b></h5><hr>
+					{% if user %}
+					{% for note in user.note_set.all %}
+					<ul>
+						<a href="{% url 'todo:view_note' note.id %}"><li><p class="card-text">{{note}}</p></li></a>
+						{{note.time}} 
+				    </ul>
+					{% endfor %}
+					{% endif %}
+					
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

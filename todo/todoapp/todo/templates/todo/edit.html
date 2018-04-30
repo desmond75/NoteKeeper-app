@@ -1,0 +1,45 @@
+
+{% extends "registration/base.html" %}
+{% block title %} Dashboard{% endblock %}
+
+{% block content %}
+
+<br>
+<div class="container" style="padding-top: 70px;">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="card" style="width: 30rem;">
+				<div class="card-body">
+					<h5 class="card-title">Editing note</h5>
+
+					{# task submission form #}
+					<form method="post" action="{% url 'todo:edit' note.id %}">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Note title</label>
+							<input type="text" class="form-control" name="title" placeholder="Task title" value="{{note.title}}">
+							<br />
+							{{errord}}
+
+							<label for="exampleFormControlTextarea1">Note body</label>
+							<textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3">{{note.body}}</textarea>
+							<br />	
+						</div>
+						<button  type="submit" class="btn" style="background:#98AFC7">Submit</button>
+					</form><br>
+					{# Display  error message if user submits form without data #}
+					{% if errors %}
+					<p class="alert alert-danger alert-dismissible fade show" role="alert">{{errors}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
+					{% endif %}
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+</div>
+{% endblock %}
+

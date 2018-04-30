@@ -1,0 +1,53 @@
+
+{% extends "registration/base.html" %}
+{% load humanize %}
+{% block title %} Dashboard{% endblock %}
+
+{% block content %}
+
+<br>
+{# Greeting text #}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<h2 style="font-family:Monospace;" class="alert alert-secondary">Hello {{user.get_username}}</h2>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="container" style="padding-top: 70px;">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="card" style="width: 30rem;">
+				<div class="card-body">
+					<h5 class="card-title">Logged out page</h5>
+
+					{# task submission form #}
+					
+
+					<a href="#" class="card-link">Another link</a>
+				</div>
+			</div>
+			<br />
+		</div>
+		<div class="col-sm-4">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Task list</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Display list of created tasks</h6>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<a href="#" class="card-link">Card link</a>
+					<a href="#" class="card-link">Another link</a>
+				</div>
+			</div>
+			<br />
+			<button type="button" class="btn btn-outline-info">View All</button>
+			
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
